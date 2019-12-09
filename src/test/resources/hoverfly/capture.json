@@ -1,0 +1,67 @@
+{
+  "data" : {
+    "pairs" : [ {
+      "request" : {
+        "path" : [ {
+          "matcher" : "exact",
+          "value" : "/users/larsthorup"
+        } ],
+        "method" : [ {
+          "matcher" : "exact",
+          "value" : "GET"
+        } ],
+        "destination" : [ {
+          "matcher" : "exact",
+          "value" : "api.github.com"
+        } ],
+        "scheme" : [ {
+          "matcher" : "exact",
+          "value" : "https"
+        } ],
+        "body" : [ {
+          "matcher" : "exact",
+          "value" : ""
+        } ]
+      },
+      "response" : {
+        "status" : 200,
+        "body" : "{\"login\":\"larsthorup\",\"id\":1202959,\"node_id\":\"MDQ6VXNlcjEyMDI5NTk=\",\"avatar_url\":\"https://avatars2.githubusercontent.com/u/1202959?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/larsthorup\",\"html_url\":\"https://github.com/larsthorup\",\"followers_url\":\"https://api.github.com/users/larsthorup/followers\",\"following_url\":\"https://api.github.com/users/larsthorup/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/larsthorup/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/larsthorup/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/larsthorup/subscriptions\",\"organizations_url\":\"https://api.github.com/users/larsthorup/orgs\",\"repos_url\":\"https://api.github.com/users/larsthorup/repos\",\"events_url\":\"https://api.github.com/users/larsthorup/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/larsthorup/received_events\",\"type\":\"User\",\"site_admin\":false,\"name\":\"Lars Thorup\",\"company\":\"ZeaLake, LLC\",\"blog\":\"https://careers.stackoverflow.com/larsthorup\",\"location\":\"København, Danmark\",\"email\":null,\"hireable\":null,\"bio\":null,\"public_repos\":102,\"public_gists\":4,\"followers\":21,\"following\":2,\"created_at\":\"2011-11-17T20:34:08Z\",\"updated_at\":\"2019-12-07T08:48:06Z\"}",
+        "encodedBody" : false,
+        "templated" : false,
+        "headers" : {
+          "Access-Control-Allow-Origin" : [ "*" ],
+          "Access-Control-Expose-Headers" : [ "ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type" ],
+          "Cache-Control" : [ "public, max-age=60, s-maxage=60" ],
+          "Content-Length" : [ "1240" ],
+          "Content-Security-Policy" : [ "default-src 'none'" ],
+          "Content-Type" : [ "application/json; charset=utf-8" ],
+          "Date" : [ "Mon, 09 Dec 2019 12:48:48 GMT" ],
+          "Etag" : [ "\"bc5f8d7ffda329dca5559b68f5e32367\"" ],
+          "Hoverfly" : [ "Was-Here" ],
+          "Last-Modified" : [ "Sat, 07 Dec 2019 08:48:06 GMT" ],
+          "Referrer-Policy" : [ "origin-when-cross-origin, strict-origin-when-cross-origin" ],
+          "Server" : [ "GitHub.com" ],
+          "Status" : [ "200 OK" ],
+          "Strict-Transport-Security" : [ "max-age=31536000; includeSubdomains; preload" ],
+          "Vary" : [ "Accept", "Accept-Encoding" ],
+          "X-Content-Type-Options" : [ "nosniff" ],
+          "X-Frame-Options" : [ "deny" ],
+          "X-Github-Media-Type" : [ "github.v3; format=json" ],
+          "X-Github-Request-Id" : [ "9519:3D532:1A8C64D5:1F9CD9BA:5DEE42AF" ],
+          "X-Ratelimit-Limit" : [ "60" ],
+          "X-Ratelimit-Remaining" : [ "58" ],
+          "X-Ratelimit-Reset" : [ "1575899299" ],
+          "X-Xss-Protection" : [ "1; mode=block" ]
+        }
+      }
+    } ],
+    "globalActions" : {
+      "delays" : [ ]
+    }
+  },
+  "meta" : {
+    "schemaVersion" : "v5",
+    "hoverflyVersion" : "v1.1.1",
+    "timeExported" : "2019-12-09T13:48:48+01:00"
+  }
+}

@@ -1,0 +1,78 @@
+{
+	"data": {
+		"pairs": [
+			{
+				"request": {
+					"path": [
+						{
+							"matcher": "exact",
+							"value": ""
+						}
+					],
+					"method": [
+						{
+							"matcher": "exact",
+							"value": "GET"
+						}
+					],
+					"destination": [
+						{
+							"matcher": "exact",
+							"value": "time.jsontest.com"
+						}
+					],
+					"scheme": [
+						{
+							"matcher": "exact",
+							"value": "http"
+						}
+					],
+					"body": [
+						{
+							"matcher": "exact",
+							"value": ""
+						}
+					]
+				},
+				"response": {
+					"status": 200,
+					"body": "{\n   \"date\": \"11-07-2019\",\n   \"milliseconds_since_epoch\": 1573115261249,\n   \"time\": \"08:27:41 AM\"\n}\n",
+					"encodedBody": false,
+					"headers": {
+						"Access-Control-Allow-Origin": [
+							"*"
+						],
+						"Content-Length": [
+							"100"
+						],
+						"Content-Type": [
+							"application/json"
+						],
+						"Date": [
+							"Thu, 07 Nov 2019 08:27:41 GMT"
+						],
+						"Hoverfly": [
+							"Was-Here"
+						],
+						"Server": [
+							"Google Frontend"
+						],
+						"X-Cloud-Trace-Context": [
+							"d558e10c6a8742ca265862e6e35a9d2d"
+						]
+					},
+					"templated": false
+				}
+			}
+		],
+		"globalActions": {
+			"delays": [],
+			"delaysLogNormal": []
+		}
+	},
+	"meta": {
+		"schemaVersion": "v5",
+		"hoverflyVersion": "v1.1.3",
+		"timeExported": "2019-11-07T09:35:53+01:00"
+	}
+}
