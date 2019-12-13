@@ -159,4 +159,42 @@ public class HoverflyDemoApplicationIntegrationTests {
 			}
 		}
 	}
+
+	@Test
+	public void timeTestCaptureThenSimulateExplicitProxy() throws Exception {
+		HoverflyConfig hoverflyCaptureConfig = localConfigs()
+				.proxyPort(61111)
+				.adminPort(61112)
+				.captureHeaders("Content-Type")
+				.proxyLocalHost() // Note: to capture requests to service under test
+				;
+		try (Hoverfly hoverflyCapture = new Hoverfly(hoverflyCaptureConfig, HoverflyMode.CAPTURE)) {
+			hoverflyCapture.start();
+
+            // Note: starting hoverflySimulate last causes the service under test to have its requests simulated
+			HoverflyConfig hoverflySimulateConfig = localConfigs()
+					.proxyPort(61113)
+					.adminPort(61114);
+			try(Hoverfly hoverflySimulate = new Hoverfly(hoverflySimulateConfig, HoverflyMode.SPY)) {
+				hoverflySimulate.start();
+				hoverflySimulate.simulate(SimulationSource.classpath("time.json"));
+
+				given()
+					.proxy("localhost", 61111) // Note: make sure the request is being captured
+					.port(port)
+					.contentType(ContentType.JSON)
+				.when()
+					.get("/service/time")
+				.peek()
+				.then()
+					.statusCode(200)
+					.body("date", is("11-07-2019")); // Note: verify that request was simulated with time.json
+			}
+
+			Path path = Paths.get("target/timeTestCaptureThenSimulateExplicitProxy.capture.json");
+			hoverflyCapture.exportSimulation(path);
+			boolean expected = true;  // Note: verify that request to service under test was captured
+			assertEquals(expected, new String(Files.readAllBytes(path)).contains("\"value\" : \"/service/time\""));
+		}
+	}
 }
