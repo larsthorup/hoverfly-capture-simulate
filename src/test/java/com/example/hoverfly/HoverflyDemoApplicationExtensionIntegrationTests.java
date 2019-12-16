@@ -9,15 +9,10 @@ import io.specto.hoverfly.junit5.HoverflyExtension;
 import io.specto.hoverfly.junit5.api.HoverflyCapture;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import static io.restassured.RestAssured.given;
 import static io.specto.hoverfly.junit.core.HoverflyConfig.localConfigs;
@@ -25,13 +20,16 @@ import static io.specto.hoverfly.junit.dsl.HoverflyDsl.service;
 import static io.specto.hoverfly.junit.dsl.ResponseCreators.success;
 import static io.specto.hoverfly.junit.dsl.matchers.HoverflyMatchers.any;
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-//@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@HoverflyCapture(config = @io.specto.hoverfly.junit5.api.HoverflyConfig(
-		proxyPort = 61111, adminPort = 61112, proxyLocalHost = true, captureHeaders = "Content-Type",
-		destination = "/service/time"),	// Use destination filter to capture just your SUT API
+@HoverflyCapture(
+		config = @io.specto.hoverfly.junit5.api.HoverflyConfig(
+				proxyPort = 61111,
+				adminPort = 61112,
+				proxyLocalHost = true,
+				captureHeaders = "Content-Type",
+				destination = "/service/time" // Use destination filter to capture just your SUT API
+		),
 		path = "target/HoverflyDemoApplicationExtensionIntegrationTests.capture.json")
 @ExtendWith(HoverflyExtension.class)
 public class HoverflyDemoApplicationExtensionIntegrationTests {
@@ -41,7 +39,7 @@ public class HoverflyDemoApplicationExtensionIntegrationTests {
 
 	private static Hoverfly hoverflySimulate;
 
-	 @BeforeAll
+	@BeforeAll
 	public static void startHoverfly() {
 		HoverflyConfig hoverflySimulateConfig = localConfigs()
 				.proxyPort(61113)
@@ -52,11 +50,8 @@ public class HoverflyDemoApplicationExtensionIntegrationTests {
 	}
 
 	@AfterAll
-	public static void saveCapture(Hoverfly hoverfly) throws Exception {
-		Path path = Paths.get("target/HoverflyDemoApplicationExtensionIntegrationTests.capture.json");
-		hoverfly.exportSimulation(path);
-		boolean expected = true; // Note: verify that request to service under test was captured
-		assertEquals(expected, new String(Files.readAllBytes(path)).contains("\"value\" : \"/service/time\""));
+	public static void closeHoverfly() {
+		hoverflySimulate.close();
 	}
 
 	@Test
@@ -72,10 +67,9 @@ public class HoverflyDemoApplicationExtensionIntegrationTests {
 		.peek()
 		.then()
 			.statusCode(200)
-			.body("date", is("11-07-2019")); // ToDo: why was request not simulated while capturing?
+			.body("date", is("11-07-2019"));
 	}
 
-	@Disabled
 	@Test
 	public void timeTestCaptureThenSimulateDsl(Hoverfly hoverflySimulate) {
 		hoverflySimulate.simulate(SimulationSource.dsl(
@@ -90,6 +84,6 @@ public class HoverflyDemoApplicationExtensionIntegrationTests {
 		.peek()
 		.then()
 			.statusCode(200)
-			.body("date", is("11-07-2019")); // ToDo: why was request not simulated while capturing?
+			.body("date", is("11-07-2019"));
 	}
 }
